@@ -1,19 +1,14 @@
 import { useEffect, useState, useReducer } from "react";
 
-import item31 from "../../img/31.jpg";
-import item42 from "../../img/42.jpg";
-import item53 from "../../img/53.jpg";
-import logoHeading from "../../img/logo-4-black.jpg";
-
 import "./carousel.styles.css";
 
-const Carousel = () => {
+const Carousel = ({ slideItems }) => {
   useEffect(() => {
     const track = document.querySelector(".carousel__track");
     const slides = Array.from(track.children);
     const nextButton = document.querySelector(".carousel__button--right");
     const prevButton = document.querySelector(".carousel__button--left");
-    const dotsNav = document.querySelector(".carousel__nav");
+    const dotsNav = document.querySelector(".carousel__indicator-container");
     const dots = Array.from(dotsNav.children);
 
     const slideWidth = slides[0].getBoundingClientRect().width;
@@ -30,6 +25,8 @@ const Carousel = () => {
     slides.forEach(setSlidePosition);
 
     const moveToSlide = (track, currentSlide, targetSlide) => {
+      const test1 = targetSlide.style.left;
+      console.log(test1);
       track.style.transform = "translateX(-" + targetSlide.style.left;
       currentSlide.classList.remove("current-slide");
       targetSlide.classList.add("current-slide");
@@ -114,23 +111,21 @@ const Carousel = () => {
       </button>
       <div className="carousel__track-container">
         <ul className="carousel__track">
-          <li className="carousel__slide current-slide">
-            <div className="hero">
-              <p>Authentic Thai</p>
-              <div className="logo-title-container">
-                <img src={logoHeading} alt="logo" />
-              </div>
-              <a href="./pages/menu.html" className="hero-btn">
-                Explore Menu
-              </a>
-            </div>
-          </li>
-          <li className="carousel__slide darken">
+          <li className="carousel__slide current-slide">{slideItems[0]};</li>
+          {/* <li className="carousel__slide ">
             <img className="carousel__image" src={item31} alt="" />
           </li>
-          <li className="carousel__slide darken">
+          <li className="carousel__slide ">
             <img className="carousel__image" src={item42} alt="" />
-          </li>
+          </li> */}
+          {slideItems.map((slide, i) => {
+            if (i != 0)
+              return (
+                <li key={i} className="carousel__slide">
+                  {slide}
+                </li>
+              );
+          })}
         </ul>
       </div>
       <button className="carousel__button carousel__button--right">
@@ -140,8 +135,18 @@ const Carousel = () => {
       <div className="carousel__nav">
         <div className="carousel__indicator-container">
           <button className="carousel__indicator current-slide"></button>
-          <button className="carousel__indicator"></button>
-          <button className="carousel__indicator"></button>
+          {/* {slideItems.map((slide, i) => {
+            if (i != 0)
+              return <button key={i} className="carousel__indicator"></button>;
+          })} */}
+          {slideItems.reduce((acc, item, i) => {
+            if (i != 0) {
+              acc.push(
+                <button key={i} className="carousel__indicator"></button>
+              );
+            }
+            return acc;
+          }, [])}
         </div>
       </div>
     </div>

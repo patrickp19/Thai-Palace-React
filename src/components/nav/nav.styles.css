@@ -1,0 +1,156 @@
+input.nav-toggle {
+  position: absolute;
+  top: -1000px;
+}
+
+.nav-relative {
+  position: relative;
+}
+
+.nav-toggle-label {
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  cursor: pointer;
+  border: 0;
+  width: 3em;
+  height: 3em;
+  background: var(--black);
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.nav__item {
+  margin-bottom: 1em;
+  margin-left: 1em;
+}
+
+.nav__item:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+nav a.nav__link {
+  text-decoration: none;
+  font-weight: 800;
+  color: var(--white);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+  font-family: var(--serif);
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  justify-content: center;
+  list-style: none;
+  z-index: 1001;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  min-height: 75px;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1000;
+  background-color: var(--black);
+  /* background-color: black; */
+}
+
+nav {
+  position: absolute;
+  text-align: center;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: var(--black);
+  transform: scale(1, 0);
+  z-index: 1000;
+  transition: transform ease-in 0.5s;
+  transform-origin: top;
+}
+
+#about {
+  position: absolute;
+  top: -5rem;
+}
+
+.nav-toggle:checked ~ nav {
+  transform: scale(1);
+}
+
+.nav-toggle:checked ~ nav a.nav__link {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out 260ms;
+}
+
+@media screen and (min-width: 800px) {
+  .nav-toggle-label {
+    display: none;
+  }
+  .logo__container {
+    align-self: center;
+    /* margin-left: 3rem; */
+    display: flex;
+    justify-content: center;
+  }
+
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  nav {
+    position: relative;
+    transform: scale(1);
+    flex-direction: row;
+    min-height: 50px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    /* margin-right: 3em; */
+    margin-top: 7px;
+    /* width: 80%; */
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: row;
+  }
+
+  nav a.nav__link {
+    position: relative;
+    opacity: 1;
+  }
+
+  nav li {
+    margin-inline-end: 1.5em;
+  }
+
+  nav a:before {
+    content: "";
+    display: block;
+    height: 5px;
+    background: var(--white);
+    position: absolute;
+    top: -0.75em;
+    left: 0;
+    right: 0;
+    transform: scale(0, 1);
+    transition: transform ease-in-out 250ms;
+  }
+
+  nav a:hover:before {
+    transform: scale(1, 1);
+  }
+}
